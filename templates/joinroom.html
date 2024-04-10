@@ -1,0 +1,104 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Video Conference</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style media="screen">
+      body {
+        background-image: url('{% static "Images/img.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .form {
+        margin-top: 20px;
+      }
+      .form header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #000000; /* Text color */
+      }
+      .form input[type='text'],
+      .form input[type='submit'] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      .form input[type='submit'] {
+        background-color: #ffd700; /* Button background color */
+        color: #080710; /* Button text color */
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition */
+      }
+      .form input[type='submit']:hover {
+        background-color: #f3c500; /* Button background color on hover */
+      }
+      .message {
+        margin-top: 20px;
+      }
+      .message p {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .message p.success {
+        color: green;
+      }
+      .message p.error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <header>Join Class</header>
+        <form action="{% url 'join_room' %}" method="POST">
+          {% csrf_token %}
+          <input type="text" placeholder="Enter room ID" name="roomID" />
+          <input type="submit" class="button" value="Join" />
+        </form>
+      </div>
+      <div class="message">
+        {% if success %}
+        <p class="success">{{ success }}</p>
+        {% endif %} {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">View Result</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href='{% url "student_home" %}'>Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Result</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <a href="#" class="btn btn-outline-primary mr-2">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <a href='{% url "addsubject" %}' class="btn btn-primary">
+          <i class="fas fa-plus"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="table_id" class="table table-hover table-center mb-0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Subject</th>
+                  <th>Assignment Mark</th>
+                  <th>Exam Mark</th>
+                  <th class="text-right">Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result, grade, grade_class in results_with_grades %}
+                <tr>
+                  <td>{{ result.id }}</td>
+                  <td>{{ result.subject_id.name }}</td>
+                  <td>{{ result.assignment_mark }}</td>
+                  <td>{{ result.exam_mark }}</td>
+                  <td class="text-right">
+                    <span
+                      class="badge badge-{{ grade_class }}"
+                      style="font-size: 24px"
+                      >{{ grade }}</span
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
