@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%p9cud=c1v5s1t(56*qmdyh!s(rp#ro1-a#(16))6h+qy_xc#@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,12 +76,24 @@ WSGI_APPLICATION = 'elearning.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',  # Database name from the URL
+        'USER': 'postgres',  # Username from the URL
+        'PASSWORD': 'ADGmIVEvpPpiBKNiweyaqInUSMrAZAaN',  # Password from the URL
+        'HOST': 'autorack.proxy.rlwy.net',  # Host from the URL
+        'PORT': '29799',  # Port from the URL
     }
 }
+
 
 
 # Password validation
